@@ -2,8 +2,8 @@
 #include <windows.h>
 #include <fstream>
 #include <string>
-#define cedula 11756176127;
-#define nombre  kevin llugcha; 
+const int CE= 11756176127;
+const char NOMBRE = 'Kevin_Alexander_Llugcha_Cepeda'; 
 using namespace std;
 //capacidad velga
 const int A=7;
@@ -38,47 +38,30 @@ const string KLLAR7="act";
 const string KLLAR8="bct";
 const string KLLAR9="aaabbct";
 const string KLLAR10="bc";
-
-void crearArchivo() {
-    // Crea un objeto ofstream para escribir en el archivo
-    ofstream archivo("datos.txt");
-
-    // Verifica si el archivo se abrió correctamente
-    if (archivo.is_open()) {
-        // Escribe los datos en el archivo
-        archivo << "Ubicación: " << endl;
-        archivo<<"cap "<<"cor "<<" tipo "<<endl;
-        archivo << A<<", "<<KLLUB1<<", "<<KLLAR1 << endl;
-        archivo << B<<", "<<KLLUB2<<", "<<KLLAR2<< endl;
-        archivo << C<<", " <<KLLUB3<<", "<<KLLAR3<< endl;
-        archivo << D<<", " <<KLLUB4<<", "<<KLLAR4<< endl;
-        archivo << D<<", " <<KLLUB5<<", "<<KLLAR5<< endl;
-        archivo << E<<", " <<KLLUB6<<", "<<KLLAR6<< endl;
-        archivo << F<<", " <<KLLUB7<<", "<<KLLAR7<< endl;
-        archivo << G<<", " <<KLLUB8<<", "<<KLLAR8<< endl;
-        archivo << H<<", " <<KLLUB9<<", "<<KLLAR9<< endl;
-        archivo << I <<", "<<KLLUB10<<", "<<KLLAR10<< endl;
-
-        // Cierra el archivo
-        archivo.close();
-        cout << "El archivo se ha creado exitosamente." << endl;
-    } else {
-        // Si no se pudo abrir el archivo, muestra un mensaje de error
-        cout << "No se pudo crear el archivo." << endl;
-    }
+void klmostrarCarga() {
+    const int totalLineas = 10;
+    int carga = 0;
+    for (int i = 0; i <= totalLineas; i++) {
+        cout << "\r" << carga * 10 << "%";
+        carga++;
+        Sleep(500); 
 }
-
-// Función para mostrar el contenido del archivo
-void mostrarArchivo() {
+}
+void KLLmostrarArchivo() {
     // Crea un objeto ifstream para leer el archivo
     ifstream archivo("datos.txt");
 
     // Verifica si el archivo se abrió correctamente
     if (archivo.is_open()) {
         string linea;
+        int contador = 0; // Variable contador para saltar las primeras dos líneas
         // Lee el archivo línea por línea y muestra su contenido en la consola
         while (getline(archivo, linea)) {
-            cout << linea << endl;
+            contador++;
+            if (contador > 2) { 
+                klmostrarCarga();// Salta las primeras dos líneas
+                cout <<" "<< linea << endl;
+            }
         }
         // Cierra el archivo
         archivo.close();
@@ -87,6 +70,35 @@ void mostrarArchivo() {
         cout << "No se pudo abrir el archivo." << endl;
     }
 }
+void KLLcrearArchivo() {
+    // Crea un objeto ofstream para escribir en el archivo
+    ofstream archivo("datos.txt");
+
+    // Verifica si el archivo se abrió correctamente
+    if (archivo.is_open()) {
+        // Escribe los datos en el archivo
+        archivo << "Ubicación: " << endl;
+        archivo<<"cap "<<"cor "<<" tipo "<<endl;
+        archivo <<A<<", "<<KLLUB1<<", "<<KLLAR1 << endl;
+        archivo <<B<<", "<<KLLUB2<<", "<<KLLAR2<< endl;
+        archivo <<C<<", " <<KLLUB3<<", "<<KLLAR3<< endl;
+        archivo <<D<<", " <<KLLUB4<<", "<<KLLAR4<< endl;
+        archivo <<E<<", " <<KLLUB5<<", "<<KLLAR5<< endl;
+        archivo <<F<<", " <<KLLUB6<<", "<<KLLAR6<< endl;
+        archivo <<G<<", " <<KLLUB7<<", "<<KLLAR7<< endl;
+        archivo << H<<", " <<KLLUB8<<", "<<KLLAR8<< endl;
+        archivo << I<<", " <<KLLUB9<<", "<<KLLAR9<< endl;
+        archivo << J <<", "<<KLLUB10<<", "<<KLLAR10<< endl;
+
+        // Cierra el archivo
+        archivo.close();
+    } else {
+        // Si no se pudo abrir el archivo, muestra un mensaje de error
+        cout << "No se pudo crear el archivo." << endl;
+    }
+}
+
+
 void KLLset_color(int color) 
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -100,10 +112,14 @@ struct KLLataque {
 
 int main() {
     int r;
+    KLLset_color(FOREGROUND_GREEN);
+    cout<<"cedula:"<<CE<<endl;
+    cout<<"nombre"<<NOMBRE<<endl;
+    KLLset_color(FOREGROUND_BLUE);
+    cout<<"     cap, beo, tipo de ar"<<endl; ;
     KLLset_color(FOREGROUND_RED);
-    crearArchivo();
-    mostrarArchivo();
-    return 0;
+    KLLcrearArchivo();
+    KLLmostrarArchivo();
 }
 
 
